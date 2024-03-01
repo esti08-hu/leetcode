@@ -1,17 +1,12 @@
 class Solution:
     def maximumOddBinaryNumber(self, s: str) -> str:
+        len_1 = 0
+        len_0 = 0
 
-        s_count = Counter(s)
+        for char in s:
+            if char == '1':
+                len_1 += 1
+            elif char == '0':
+                len_0 += 1
 
-        len_1 = s_count['1']
-        len_0 = s_count['0']
-        s1= ''
-        if len_1 > 1:
-            for i in range(len_1-1):
-                s1+="1"
-        if len_0 > 0:
-            for i in range(len_0):
-                s1+="0"
-        if len_1 > 0:
-            s1+="1"
-        return s1
+        return '1' * (len_1 - 1) + '0' * len_0 + '1'
