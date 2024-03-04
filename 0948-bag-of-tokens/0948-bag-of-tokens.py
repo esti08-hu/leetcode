@@ -19,4 +19,12 @@ class Solution:
             else:
                 break
 
+            if left <= right and power < tokens[left]:
+                if score > 0:
+                    power += tokens[right]
+                    score -= 1
+                    right -= 1
+                else:
+                    break
+
         return max_score
