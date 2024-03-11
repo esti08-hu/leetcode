@@ -1,28 +1,22 @@
 class Solution {
 public:
     string customSortString(string order, string s) {
-        vector<int> freq(26, 0); 
-        
+        unordered_map<char, int> freq; 
         for (char ch : s) {
-            freq[ch - 'a']++;
+            freq[ch]++;
         }
 
         string result;
 
-        
         for (char ch : order) {
-            while (freq[ch - 'a'] > 0) {
-                result.push_back(ch);
-                freq[ch - 'a']--;
+            if (freq.find(ch) != freq.end()) {
+                result.append(freq[ch], ch);
+                freq.erase(ch);
             }
         }
 
-   
-        for (int i = 0; i < 26; i++) {
-            while (freq[i] > 0) {
-                result.push_back('a' + i);
-                freq[i]--;
-            }
+        for (auto it : freq) {
+            result.append(it.second, it.first);
         }
 
         return result;
