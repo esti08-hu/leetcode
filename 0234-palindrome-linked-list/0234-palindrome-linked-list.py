@@ -6,14 +6,15 @@ class ListNode:
 
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
-        if not head or not head.next:
-            return True
-
-        slow = fast = head
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
+        fast = head
+        slow = head
         
+        #find the middle of the list
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+            
+        #reverse the half list
         prev = None
         curr = slow
         while curr:
@@ -21,13 +22,18 @@ class Solution:
             curr.next = prev
             prev = curr
             curr = next_node
-            
-        first_half = head
-        second_half = prev
-        while second_half:
-            if first_half.val != second_half.val:
-                return False
-            first_half = first_half.next
-            second_half = second_half.next
         
+        #check palendrome
+        left, right = head, prev
+        while right:
+            if left.val != right.val:
+                return False
+            else:
+                left = left.next
+                right = right.next
         return True
+        
+        
+        
+            
+        
