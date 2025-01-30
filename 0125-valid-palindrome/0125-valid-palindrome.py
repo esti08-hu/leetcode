@@ -1,7 +1,5 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        s=s.split()
-        s="".join(s)
         res=""
         for c in s:
             if not c.isupper() and not c.islower() and not c.isnumeric():
