@@ -3,13 +3,10 @@ class Solution:
         s=s.split()
         s="".join(s)
         res=""
-        c="q11w"
-        print(c[1].isnumeric())
         for c in s:
-            if not c.isupper() or not c.islower() and c.isnumeric():
+            if not c.isupper() and not c.islower() and not c.isnumeric():
                 continue
             else: 
                 res+=c
-                continue
         res_lower= res.lower()
         return res_lower == res_lower[::-1]
