@@ -10,4 +10,4 @@ class Solution:
         if num_2%2==0 or num_2==0:
             return (num[-rem-2])
         else:
-            return num[rem]
+            return num[rem+1]
