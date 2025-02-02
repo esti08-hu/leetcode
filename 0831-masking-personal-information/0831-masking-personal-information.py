@@ -8,13 +8,13 @@ class Solution:
 
 
         local_num = rs[-4:]
-        hash_num = "***-***-" + local_num
+        masked_num = "***-***-" + local_num
 
         if len(rs)==10:
-            return(hash_num)
+            return(masked_num)
         elif len(rs)==11:
-            return("+*-" + hash_num)
+            return("+*-" + masked_num)
         elif len(rs)==12:
-            return("+**-" + hash_num)
+            return("+**-" + masked_num)
         elif len(rs)==13:
-            return("+***-" + hash_num)
+            return("+***-" + masked_num)
