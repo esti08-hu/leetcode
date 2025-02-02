@@ -4,7 +4,7 @@ class Solution:
             idx = s.index("@")
             return s[0].lower() + "*****" + s[idx-1].lower() + s[idx:].lower()
         
-        rs = (s.replace("(", "").replace(")", "").replace("-", "").replace("+", ""))
+        rs = (s.replace("(", "").replace(")", "").replace("-", "").replace("+", "").replace(" ", ""))
 
 
         local_num = rs[-4:]
