@@ -2,7 +2,7 @@ class Solution:
     def maskPII(self, s: str) -> str:
         if "@" in s:
             idx = s.index("@")
-            return s[0].lower() + "*****" + s[idx-1].lower() + s[idx:].lower()
+            return s[0].lower() + "*****" + s[idx-1:].lower()
         
         rs = (s.replace("(", "").replace(")", "").replace("-", "").replace("+", "").replace(" ", ""))
 
