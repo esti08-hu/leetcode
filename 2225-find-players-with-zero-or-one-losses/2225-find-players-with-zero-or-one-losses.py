@@ -21,7 +21,7 @@ class Solution:
             if w not in loss_set:
                 res.append(w)
 
-        ans.append(res)
+        ans.append(sorted(res))
         ans.append(sorted(res1))
         return ans
 
