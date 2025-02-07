@@ -1,53 +1,22 @@
 class Solution:
-    def findRotation(self, mat: List[List[int]], target: List[List[int]]) -> bool:
-        if mat == target:
-            return True
+    def rotate_90(self, mat: List[List[int]]) -> List[List[int]]:
         col = len(mat)
         row = len(mat[0])
+        rotated = []
 
-        rotate_mat = []
         for c in range(row):
-            new_row = []
+            new_row = [mat[r][c] for r in range(col)]
+            rotated.append(new_row[::-1])
+        
+        return rotated
 
-            for r in range(col):
-                new_row.append(mat[r][c])
-            print(new_row[::-1])
-            rotate_mat.append(new_row[::-1])
-
-        if rotate_mat == target:
-            return True
-        else:
-            mat = rotate_mat
-            rotate_mat = []
-            for c in range(row):
-                new_row = []
-
-                for r in range(col):
-                    new_row.append(mat[r][c])
-                print(new_row[::-1])
-                rotate_mat.append(new_row[::-1])
-
-            print(rotate_mat, target)
-
-            if rotate_mat == target:
+    def findRotation(self, mat: List[List[int]], target: List[List[int]]) -> bool:
+        for _ in range(4):
+            if mat==target:
                 return True
-            else:
-                mat = rotate_mat
-                rotate_mat = []
-                for c in range(row):
-                    new_row = []
-
-                    for r in range(col):
-                        new_row.append(mat[r][c])
-                    print(new_row[::-1])
-                    rotate_mat.append(new_row[::-1])
-
-                print(rotate_mat, target)
-
-                if rotate_mat == target:
-                    return True
+            mat = self.rotate_90(mat)
         
         return False
 
 
-
+        
