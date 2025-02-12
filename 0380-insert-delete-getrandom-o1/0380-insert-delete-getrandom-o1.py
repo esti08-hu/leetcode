@@ -1,7 +1,7 @@
 class RandomizedSet:
     def __init__(self):
-        self.numbers = {}  # dictionary to store values and their indices
-        self.values = []  # list to store values
+        self.numbers = {} 
+        self.values = []
         
     def insert(self, val: int) -> bool:
         if val in self.numbers:
@@ -15,10 +15,10 @@ class RandomizedSet:
             return False
         index = self.numbers[val]
         last_val = self.values[-1]
-        self.values[index] = last_val  # move last value to the removed value's position
-        self.numbers[last_val] = index  # update the index of the last value in the dictionary
-        self.values.pop()  # remove the last value from the list
-        del self.numbers[val]  # remove the value from the dictionary
+        self.values[index] = last_val  
+        self.numbers[last_val] = index
+        self.values.pop()
+        del self.numbers[val]
         return True
         
     def getRandom(self) -> int:
