@@ -15,20 +15,18 @@ class Solution:
             else:
                 return 0
 
-        def largestNumber(nums):
-            nums_str = list(map(str, nums))
-            
-            nums_str.sort(key=cmp_to_key(custom_compare))
-            
-            largest_num = ''.join(nums_str)
-            
-            if largest_num[0] == '0':
-                return '0'
-            else:
-                return largest_num
-        sorted_nums = largestNumber(nums)
+        nums_str = list(map(str, nums))
+        
+        nums_str.sort(key=cmp_to_key(custom_compare))
+        
+        largest_num = ''.join(nums_str)
+        
+        if largest_num[0] == '0':
+            return '0'
+        else:
+            return largest_num
+                
 
-        return "".join(map(str, sorted_nums))
 
 
 
