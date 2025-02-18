@@ -19,12 +19,20 @@ class Solution:
             pre_sum[i] = pre[i] + pre_sum[i-1]
 
         s = list(s)
-        for i in range(n):
-            shift = pre_sum[i] % 26
-            pos = ord(s[i]) - ord("a")
-            shift_pos = (pos + shift) % 26
-            new_char = chr(shift_pos + ord("a"))
+    for i in range(n):
+        # Calculate shift value based on the prefix sum, wrapping around using modulo 26
+        shift = pre_sum[i] % 26
+        
+        # Get the current position of the character in the alphabet
+        pos = ord(s[i]) - ord("a")
+        
+        # Calculate the new position after applying the shift, also wrapping around
+        shift_pos = (pos + shift) % 26
+        
+        # Convert the new position back to a character
+        new_char = chr(shift_pos + ord("a"))
+        
+        s[i] = new_char
 
-            s[i] = new_char
 
         return "".join(s)
