@@ -1,13 +1,13 @@
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
+        nums_dict = defaultdict(int)
+        nums_dict[0] = 1 
+        prefixSum = 0
         count = 0
-        n = len(nums)
         
-        for i in range(n):
-            current_sum = 0
-            for j in range(i, n):
-                current_sum += nums[j]
-                if current_sum == k:
-                    count += 1
+        for num in nums:
+            prefixSum += num
+            count += nums_dict[prefixSum - k]
+            nums_dict[prefixSum] += 1
         
         return count
