@@ -10,13 +10,13 @@ class Solution:
                 prefix_sum[r+1] -= 1
 
         for i in range(1, len(prefix_sum)):
-            prefix_sum[i] += prefix_sum[i-1]
+            prefix_sum[i] = prefix_sum[i] + prefix_sum[i-1]
         
         prefix_sum.pop()
 
         prefix_sum.sort(reverse=True)
         nums.sort(reverse=True)
 
-        max_sum = sum(prefix_sum[i]*nums[i] for i in range(len(nums)))
+        max_sum = sum([prefix_sum[i]*nums[i] for i in range(len(nums))])
 
         return max_sum%(10**9 + 7)
