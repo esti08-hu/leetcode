@@ -7,8 +7,9 @@ class Solution:
             b = int(c - a)
             if b < 0:
                 continue 
+            sqrt_b = int(math.sqrt(b))
 
-            if b == math.pow(int(math.sqrt(b)), 2):
+            if b == sqrt_b * sqrt_b:
                 return True
         
         return False 
