@@ -6,7 +6,7 @@ class Solution:
 
         for n in nums:
             pre += n
-            pre_mod = (pre % k + k) % k 
+            pre_mod = pre % k
 
             if pre_mod in pre_dict:
                 count += pre_dict[pre_mod]
