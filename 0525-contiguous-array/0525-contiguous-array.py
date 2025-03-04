@@ -1,18 +1,21 @@
 class Solution:
     def findMaxLength(self, nums: List[int]) -> int:
-        max_length = 0
-        count = 0
-        count_map = {0: -1}  
-        
-        for i, num in enumerate(nums):
-            if num == 0:
-                count += 1
+        if len(nums) < 2:
+            return 0
+
+        pre = 0
+        pre_dict  = {0 : -1}
+        max_len = 0
+        for i, n in enumerate(nums):
+            if n == 0:
+                pre -= 1
             else:
-                count -= 1
-                
-            if count in count_map:
-                max_length = max(max_length, i - count_map[count])
+                pre += 1
+
+            if pre not in  pre_dict:
+                pre_dict[pre] = i
+
             else:
-                count_map[count] = i
+                max_len = max(max_len, i - pre_dict[pre])
         
-        return max_length
+        return max_len
