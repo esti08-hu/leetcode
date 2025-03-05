@@ -1,6 +1,7 @@
 class DataStream:
 
     def __init__(self, value: int, k: int):
+        self.Q = deque()
         self.k = k
         self.value =  value
         self.count = 0
