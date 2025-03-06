@@ -19,8 +19,8 @@ class Solution:
         while slow:
             right.append(slow.val)
             slow = slow.next
-        rev_right = right[::-1]
+        right = right[::-1]
 
-        return max(left[i]+rev_right[i] for i in range(len(right)))
+        return max(left[i]+right[i] for i in range(len(right)))
 
 
