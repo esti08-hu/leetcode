@@ -7,9 +7,7 @@ class Solution:
             while stk and temperatures[stk[-1]] < temperatures[i]:
                 idx = stk.pop()
                 t_dict[idx] = i - idx
+                res[idx] = i - idx
             stk.append(i)
-
-        for k,v in t_dict.items():
-            res[k] = v
 
         return res
