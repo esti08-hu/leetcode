@@ -9,9 +9,6 @@ class Solution:
         def dfs(node):
             if not node:
                 return None
-                
-            if not node.right and not node.left:
-                return node
 
             if node.val > val:
                 if node.left:
