@@ -8,7 +8,7 @@ class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
         if not root:
             return True
-            
+
         Q = deque([(root.left, root.right)])
         while Q:
             left, right = Q.popleft()
@@ -18,7 +18,7 @@ class Solution:
 
             if not left or not right:
                 return False
-                
+
             if left.val != right.val:
                 return False
 
