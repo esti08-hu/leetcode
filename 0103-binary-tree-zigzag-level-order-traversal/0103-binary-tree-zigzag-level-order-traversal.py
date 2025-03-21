@@ -1,3 +1,4 @@
+from collections import deque
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -14,17 +15,21 @@ class Solution:
         def dfs(node, level):
             if not node:
                 return
-            
+
             if level >= len(results):
-                results.append([])
-            
+                results.append(deque([]))
+
             if level % 2 == 0:
                 results[level].append(node.val) 
             else:
-                results[level].insert(0, node.val)
+                results[level].appendleft(node.val)
 
             dfs(node.left, level + 1)
             dfs(node.right, level + 1)
-
+        
         dfs(root, 0)
+
+        for i, res in enumerate(results):
+            results[i] = [*res]
+
         return results
