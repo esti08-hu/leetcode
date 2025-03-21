@@ -8,14 +8,18 @@ from collections import deque
 class Solution:
     def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         res = []
-        dq = deque([root] if root else [])
+        if not root:
+            return []
+
+        dq = deque([root])
 
         while dq:
             lvl = []
-            for i in range(len(dq)):
+            n = len(dq)
+            for i in range(n):
                 node = dq.popleft()
                 lvl.append(node.val)
-                
+
                 if node.left:
                     dq.append(node.left)
                 
