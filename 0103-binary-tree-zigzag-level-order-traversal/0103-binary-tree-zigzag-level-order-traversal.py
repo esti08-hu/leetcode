@@ -7,29 +7,22 @@ from collections import deque
 #         self.right = right
 class Solution:
     def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        if not root:
-            return []
+        res = []
+        dq = deque([root] if root else [])
+
+        while dq:
+            lvl = []
+            for i in range(len(dq)):
+                node = dq.popleft()
+                lvl.append(node.val)
+                
+                if node.left:
+                    dq.append(node.left)
+                
+                if node.right:
+                    dq.append(node.right)
+
+            lvl = list(reversed(lvl)) if len(res) % 2 else lvl
+            res.append(lvl)
         
-        results = []
-        
-        def dfs(node, level):
-            if not node:
-                return
-
-            if level >= len(results):
-                results.append(deque([]))
-
-            if level % 2 == 0:
-                results[level].append(node.val) 
-            else:
-                results[level].appendleft(node.val)
-
-            dfs(node.left, level + 1)
-            dfs(node.right, level + 1)
-        
-        dfs(root, 0)
-
-        for i, res in enumerate(results):
-            results[i] = [*res]
-
-        return results
+        return res
