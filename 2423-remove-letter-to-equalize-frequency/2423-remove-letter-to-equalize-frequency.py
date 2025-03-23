@@ -1,5 +1,3 @@
-from collections import Counter
-
 class Solution:
     def equalFrequency(self, word: str) -> bool:
         c = Counter(word)
