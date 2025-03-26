@@ -8,18 +8,19 @@ class Solution:
     def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
 
         def getMin(node):
-            while node.left:
-                node = node.left
-            return node
+            curr = node
+            while curr.left:
+                curr = curr.left
+            return curr
 
-        def finder(node, key):
+        def remove(node, key):
             if not node:
                 return None
 
             if node.val > key:
-                node.left = finder(node.left, key)
+                node.left = remove(node.left, key)
             elif node.val < key:
-                node.right = finder(node.right, key)
+                node.right = remove(node.right, key)
             else:
                 if not node.left and not node.right:
                     return None
@@ -31,8 +32,8 @@ class Solution:
                     successor = getMin(node.right)
                     node.val = successor.val  
 
-                    node.right = finder(node.right, successor.val) 
+                    node.right = remove(node.right, successor.val) 
 
             return node
 
-        return finder(root, key)
+        return remove(root, key)
