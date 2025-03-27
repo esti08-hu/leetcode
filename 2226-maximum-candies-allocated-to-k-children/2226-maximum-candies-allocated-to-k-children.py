@@ -1,14 +1,18 @@
-from typing import List
-
 class Solution:
     def maximumCandies(self, candies: List[int], k: int) -> int:
+
+        if sum(candies) < k:
+            return 0
+        elif sum(candies) == k:
+            return 1
+             
         left, right = 1, max(candies)
 
         def check(mid):
             _sum = 0
             for c in candies:
                 _sum += (c // mid)
-                # print(_sum)
+
             return _sum >= k
 
         while left <= right:
