@@ -5,7 +5,7 @@ class Solution:
         total = 0
         for a, c in ans_count.items():
             size = a + 1
-            groups = (c + size - 1) // size
+            groups = (c + a) // size
             total += (groups * size)
         
         return total
