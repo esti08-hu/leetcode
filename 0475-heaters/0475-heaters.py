@@ -1,23 +1,19 @@
 class Solution:
     def findRadius(self, houses: List[int], heaters: List[int]) -> int:
-        houses.sort()
+        def find(heaters, house):
+            left, right = 0, len(heaters)-1
+            min_radius = float('inf')
+            while left<=right:
+                mid = (left+right)//2
+                min_radius = min((min_radius, abs(heaters[mid]-house)))
+                if heaters[mid] < house:
+                    left = mid+1
+                else:
+                    right = mid-1
+            return min_radius
+        
         heaters.sort()
-
-        def check(radius):
-            heater_idx = 0
-            for house in houses:
-                while heater_idx < len(heaters) and heaters[heater_idx] + radius < house:
-                    heater_idx += 1
-                if heater_idx == len(heaters) or abs(heaters[heater_idx] - house) > radius:
-                    return False
-            return True
-
-        left, right = 0, max(max(houses), max(heaters))
-        while left <= right:
-            mid = (left + right) // 2
-            if check(mid):
-                right = mid - 1
-            else:
-                left = mid + 1 
-
-        return left
+        radius = 0
+        for house in houses:
+            radius = max(radius, find(heaters, house))
+        return radius
