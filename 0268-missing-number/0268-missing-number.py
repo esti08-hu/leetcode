@@ -1,5 +1,13 @@
+from typing import List
+
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
-        original_sum = sum([i for i in range(len(nums)+1)])
-        nums_sum = sum([i for i in (nums)])
-        return original_sum - nums_sum
+        nums.sort()  # Ensure the array is sorted
+        left, right = 0, len(nums)
+        while left < right:
+            mid = (left + right) // 2
+            if nums[mid] > mid:  # Missing number is on the left
+                right = mid
+            else:  # Missing number is on the right
+                left = mid + 1
+        return left  # The missing number is at the final position of 'left'
