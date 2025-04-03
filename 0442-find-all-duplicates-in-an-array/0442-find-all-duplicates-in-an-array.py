@@ -1,11 +1,18 @@
-from collections import Counter
 class Solution:
-    def findDuplicates(self, nums: List[int]) -> List[int]:
-        res = []
-        for n in nums:
-            n = abs(n)
-            if nums[n - 1] < 0:
-                res.append(n)
-            nums[n - 1] = -nums[n - 1]
+    def findDuplicates(self, nums: List[int]) -> List[int]:     
 
-        return res
+        i = 0
+        while i < len(nums):
+            correct_index = nums[i] - 1
+
+            if nums[i] != nums[correct_index]:
+                nums[i], nums[correct_index] = nums[correct_index], nums[i]
+            else:
+                i += 1
+                
+        duplicates = []
+        for i in range(len(nums)):
+            if nums[i] != i + 1:
+                duplicates.append(nums[i])
+        
+        return duplicates
