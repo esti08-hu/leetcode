@@ -3,12 +3,16 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        count = [0]*3
-        for n in nums:
-            count[n] +=1
+        left, mid, right = 0,0, len(nums) -1
 
-        index = 0
-        for c in range(len(count)):
-            for i in range(count[c]):
-                nums[index] = c
-                index += 1
+        while mid <= right:
+            if nums[mid] == 0:
+                nums[left], nums[mid]=nums[mid],nums[left]
+                left += 1
+                mid += 1
+            elif nums[mid] == 1:
+                mid += 1
+            else:
+                nums[mid], nums[right] = nums[right], nums[mid]
+                right -=1
+            
