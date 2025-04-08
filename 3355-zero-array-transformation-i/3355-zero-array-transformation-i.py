@@ -8,12 +8,11 @@ class Solution:
             diff[l] +=1
             if r + 1 < n:
                 diff[r+1]-=1
-
-        for i in range(1, n+1):
-            diff[i] += diff[i-1]
+        pre = 0
         
         for i in range(n):
-            if nums[i] > diff[i]:
+            pre+=diff[i]
+            if nums[i] > pre:
                 return False
         
         return True
