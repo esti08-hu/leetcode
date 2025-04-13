@@ -4,19 +4,21 @@ class Solution:
         
         num_list = [edge[1] for edge in edges]
 
-        num_set = set(num_list)
+        # num_set = set(num_list)
 
-        c = [-1]*(n)
+        degree = [-1]*(n)
         
-        for num in num_set:
-            c[num] = num
-        x = []
+        for x in num_list:
+            degree[x] = x
+
+        res = []
         for i in range(n):
-            if c[i] == -1:
-                x.append(i)
-        if len(x) == 0:
+            if degree[i] == -1:
+                res.append(i)
+
+        if len(res) == 0:
             return edges[0][0]
-        elif len(x) > 1:
+        elif len(res) > 1:
             return -1
         else:
-            return x[0]
+            return res[0]
