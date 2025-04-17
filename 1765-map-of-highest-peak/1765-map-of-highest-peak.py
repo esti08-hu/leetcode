@@ -18,8 +18,8 @@ class Solution:
                 r, c = q.popleft()
                 for dr, dc in directions:
                     row, col = dr + r, dc + c
-                    if (row < 0 or row == len(isWater) or
-                        col < 0 or col == len(isWater[0]) or
+                    if (row < 0 or row == rows or
+                        col < 0 or col == cols or
                         isWater[row][col] != -1):
                         continue
                     isWater[row][col] = level
