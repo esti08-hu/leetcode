@@ -4,8 +4,8 @@ class Solution:
         cols = len(image[0])
         q = deque()
         q.append((sr, sc))
-        visited = set()
-        visited.add((sr, sc))
+        visited = set((sr, sc))
+        
         original_color = image[sr][sc]
         image[sr][sc] = color
         directions = [[0,1], [0,-1], [1,0], [-1,0]]
@@ -23,5 +23,5 @@ class Solution:
                 image[row][col] = color
                 q.append((row, col))
                 visited.add((row, col))
-        
+
         return image
