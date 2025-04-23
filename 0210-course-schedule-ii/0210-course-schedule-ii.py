@@ -6,9 +6,11 @@ class Solution:
         for course, pre in prerequisites:
             graph[pre].append(course)
             indegree[course] += 1
-            
-        q = deque([course for course in range(numCourses) if indegree[course] == 0])
-        
+        q = deque()
+        for course in range(numCourses):
+            if indegree[course] == 0:
+                q.append(course)
+
         order = []
         while q:
             course = q.popleft()
