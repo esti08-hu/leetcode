@@ -9,12 +9,13 @@ class Solution:
             
         q = deque([course for course in range(numCourses) if indegree[course] == 0])
         
-        res = []
+        order = []
         while q:
             course = q.popleft()
-            res.append(course)
+            order.append(course)
             for nb in graph[course]:
                 indegree[nb] -= 1
                 if indegree[nb] == 0:
                     q.append(nb)
-        return res if len(res) == numCourses else []
+
+        return order if len(order) == numCourses else []
