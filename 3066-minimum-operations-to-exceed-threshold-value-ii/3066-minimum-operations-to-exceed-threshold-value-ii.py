@@ -7,8 +7,6 @@ class Solution:
         while len(heap) >= 2 :
             x, y = heappop(heap), heappop(heap)
             if x >= k and y >= k:
-                heappush(heap, x)
-                heappush(heap, y)
                 return count
 
             else:
