@@ -9,7 +9,7 @@ class Solution:
             if x == parent[x]:
                 return x
             parent[x] = find(parent[x])
-            return find(parent[x])
+            return parent[x]
 
         def union(x, y):
             rx = find(x)
