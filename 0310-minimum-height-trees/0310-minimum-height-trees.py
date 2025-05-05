@@ -1,30 +1,21 @@
-from collections import defaultdict, deque
-from typing import List
-
 class Solution:
     def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:
         if n == 1:
             return [0]
-        
-        adjacency_list = defaultdict(list)
-        degree = [0] * n
+        adj = defaultdict(list)
         for u, v in edges:
-            adjacency_list[u].append(v)
-            adjacency_list[v].append(u)
-            degree[u] += 1
-            degree[v] += 1
-        
-        leaves = deque(i for i in range(n) if degree[i] == 1)
-        
-        remaining_nodes = n
-        while remaining_nodes > 2:
-            leaves_count = len(leaves)
-            remaining_nodes -= leaves_count
-            for _ in range(leaves_count):
-                leaf = leaves.popleft()
-                for neighbor in adjacency_list[leaf]:
-                    degree[neighbor] -= 1
-                    if degree[neighbor] == 1:
-                        leaves.append(neighbor)
-        
-        return list(leaves)
+            adj[u].append(v)
+            adj[v].append(u)
+
+        leaves = [i for i in range(n) if len(adj[i]) == 1]
+        while n > 2:
+            n -= len(leaves)
+            new_leaves = []
+            for leaf in leaves:
+                neighbor = adj[leaf].pop()
+                adj[neighbor].remove(leaf)
+                if len(adj[neighbor]) == 1:
+                    new_leaves.append(neighbor)
+            leaves = new_leaves
+            
+        return leaves
