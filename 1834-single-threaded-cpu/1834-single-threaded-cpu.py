@@ -2,6 +2,7 @@ class Solution:
     def getOrder(self, tasks: List[List[int]]) -> List[int]:
         heap  = []
         tasks = sorted([(start, duration, i) for i, (start, duration) in enumerate(tasks)])
+        print(tasks)
         n = len(tasks)
         result = []
         i = 0
@@ -16,5 +17,3 @@ class Solution:
             result.append(index)
             time += duration
         return result
-
-    
