@@ -17,5 +17,7 @@ class Solution:
             answer[node] = min_person
             return min_person
 
-        return [dfs(i) for i in range(n)]
-        
+        for i in range(n):
+            if answer[i] == -1:
+                dfs(i)
+        return answer
