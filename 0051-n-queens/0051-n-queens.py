@@ -20,13 +20,14 @@ class Solution:
                 mainDiag.add(r + c)
                 secDiag.add(r - c)
                 board[r][c] = "Q"
-                
+
                 backtrack(r+1)
 
                 col.remove(c)
                 mainDiag.remove(r + c)
                 secDiag.remove(r - c)
                 board[r][c] = "."
-        
+
         backtrack(0)
         return res
+        
