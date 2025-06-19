@@ -4,19 +4,18 @@ class Solution:
     def hasValidPath(self, grid: List[List[int]]) -> bool:
         m, n = len(grid), len(grid[0])
         directions = {
-            1: [(0, -1), (0, 1)],  # left, right
-            2: [(-1, 0), (1, 0)],  # up, down
-            3: [(0, -1), (1, 0)],  # left, down
-            4: [(0, 1), (1, 0)],   # right, down
-            5: [(0, -1), (-1, 0)], # left, up
-            6: [(0, 1), (-1, 0)]   # right, up
+            1: [(0, -1), (0, 1)],  
+            2: [(-1, 0), (1, 0)],  
+            3: [(0, -1), (1, 0)],  
+            4: [(0, 1), (1, 0)],   
+            5: [(0, -1), (-1, 0)], 
+            6: [(0, 1), (-1, 0)]   
         }
         
         def is_valid(x, y):
             return 0 <= x < m and 0 <= y < n
         
         def can_connect(from_dir, to_dir, dx, dy):
-            # Check if the next cell has a direction that connects back
             return (-dx, -dy) in directions[to_dir]
         
         visited = set()
