@@ -20,7 +20,7 @@ class Solution:
                 mainDiag.add(r + c)
                 secDiag.add(r - c)
                 board[r][c] = "Q"
-
+    
                 backtrack(r+1)
 
                 col.remove(c)
