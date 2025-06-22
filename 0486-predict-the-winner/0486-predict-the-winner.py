@@ -8,4 +8,3 @@ class Solution:
             return max(left, right)
         
         return helper(nums, 0, len(nums) - 1) >= 0
-         
