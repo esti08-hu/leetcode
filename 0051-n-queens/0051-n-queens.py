@@ -1,33 +1,28 @@
-class Solution:
-    def solveNQueens(self, n: int) -> List[List[str]]:
-        col = set()
-        mainDiag = set()
-        secDiag = set()
+class Solution(object):
+    def solveNQueens(self, n):
+        """
+        :type n: int
+        :rtype: List[List[str]]
+        """
+        def is_not_under_attack(row, col):
+            for prev_row in range(row):
+                if board[prev_row] == col or \
+                   board[prev_row] - prev_row == col - row or \
+                   board[prev_row] + prev_row == col + row:
+                    return False
+            return True
 
-        res = []
-        board = [["."]*n for i in range(n)]
+        def place_queen(row):
+            if row == n:
+                result.append(board[:])
+                return
+            for col in range(n):
+                if is_not_under_attack(row, col):
+                    board[row] = col
+                    place_queen(row + 1)
+                    board[row] = -1
 
-        def backtrack(r):
-            if r == n:
-                copy = ["".join(row) for row in board]
-                res.append(copy)
-                return res 
-            
-            for c in range(n):
-                if c in col or (r+c) in mainDiag or (r-c) in secDiag:
-                    continue
-                col.add(c)
-                mainDiag.add(r + c)
-                secDiag.add(r - c)
-                board[r][c] = "Q"
-    
-                backtrack(r+1)
-
-                col.remove(c)
-                mainDiag.remove(r + c)
-                secDiag.remove(r - c)
-                board[r][c] = "."
-
-        backtrack(0)
-        return res
-        
+        result = []
+        board = [-1] * n
+        place_queen(0)
+        return [["." * i + "Q" + "." * (n - i - 1) for i in sol] for sol in result]
