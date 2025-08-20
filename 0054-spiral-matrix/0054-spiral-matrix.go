@@ -3,8 +3,10 @@ func spiralOrder(matrix [][]int) []int {
 
         t, b := 0, len(matrix) - 1
         l, r := 0, len(matrix[0]) - 1
+    if len(matrix) == 0 || len(matrix[0]) == 0 {
+        return res 
+    }
 
-        
     for t <= b && l <= r{
         for i:=l; i < r+1; i++ {
             res = append(res, matrix[t][i])
