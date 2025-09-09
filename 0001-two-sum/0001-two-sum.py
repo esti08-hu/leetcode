@@ -1,10 +1,10 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        prev = {}
+        n = len(nums)
+        num_to_idx = {}
 
-        for i, n in enumerate(nums):
-            dif = target - n
-            if dif in prev:
-                return [prev [dif], i]
-            prev[n] = i
-        return
+        for i, num in enumerate(nums):
+            exists = target-num
+            if exists in num_to_idx:
+                return [num_to_idx[exists], i]
+            num_to_idx[num] = i
