@@ -1,12 +1,14 @@
 class Solution:
     def separateDigits(self, nums: List[int]) -> List[int]:
-        res = []
-        for n in nums:
-            curr = []
-            while n > 0:
-                curr.append(n%10)
-                n //= 10
-            curr.reverse()
-            res.extend(curr)
-        return res
+        answer = []
+        for num in nums:
+            if num > 9:
+                rem = []
+                while num > 0:
+                    rem.append(num%10)
+                    num = num//10
+                answer.extend(rem[::-1])
+            else: answer.append(num)
+        return answer
+                
 
