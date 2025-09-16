@@ -6,20 +6,20 @@
 #         self.right = right
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        q = deque()
+        if root:
+            q.append(root)
         res = []
-        dq = deque([root] if root else [])
+        while q:
+            level = []
+            for i in range(len(q)):
+                curr = q.popleft()
 
-        while dq:
-            lvl =  []
-            for i in range(len(dq)):
-                node = dq.popleft()
-                lvl.append(node.val)
+                level.append(curr.val)
 
-                if node.left:
-                    dq.append(node.left)
-                if node.right:
-                    dq.append(node.right)
-
-            res.append(lvl)
-        
+                if curr.left:
+                    q.append(curr.left)
+                if curr.right:
+                    q.append(curr.right)
+            res.append(level)   
         return res
