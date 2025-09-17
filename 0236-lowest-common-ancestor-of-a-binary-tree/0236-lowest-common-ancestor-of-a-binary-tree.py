@@ -11,7 +11,7 @@ class Solution:
             if not node:
                 return
             
-            if node == p or node == q:
+            if node.val == p.val or node.val == q.val:
                 return node
             
             left = dfs(node.left)
@@ -20,7 +20,5 @@ class Solution:
             if left and right:
                 return node
             
-            return left if left else right
+            return right if right else left
         return dfs(root)
-
-
