@@ -1,9 +1,15 @@
 class Solution:
     def fib(self, n: int) -> int:
-        one, two = 0, 1
-        
-        for i in range(n):
-            temp = one
-            one = one + two
-            two = temp
-        return one
+        cache = {}
+        def dfs(x):
+            if x == 0:
+                return 0
+            if x == 1:
+                return 1
+
+            if x in cache:
+                return cache[x]
+            cache[x] = self.fib(x-2) + self.fib(x-1)
+            return cache[x]
+
+        return dfs(n)
