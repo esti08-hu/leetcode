@@ -1,24 +1,14 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        memo = {}
-
-        def dfs(idx):
-            if idx >= len(nums):
-                return 0
+        if len(nums)==1:
+            return nums[0]
             
-            if idx in memo:
-                return memo[idx]
+        n = len(nums)
+        dp = [0]*n
 
-            r = nums[idx] + dfs(idx + 2)
-            skip = dfs(idx+1)
+        dp[0] = nums[0]
+        dp[1] = max(nums[0], nums[1])
 
-            memo[idx] = max(r, skip)
-
-            return memo[idx]
-        return dfs(0)
-
-            
-    
-    
-
-
+        for i in range(2, n):
+            dp[i] = max(dp[i-1], dp[i-2]+nums[i])
+        return dp[-1]
