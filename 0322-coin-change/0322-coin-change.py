@@ -1,9 +1,23 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        dp = [0]+[float("inf")] * (amount)
+        cache = {}
 
-        for a in range(1, amount+1):
+        def dfs(amt):
+            if amt == 0:
+                return 0
+            if amt < 0:
+                return float("inf")
+            if amt in cache:
+                return cache[amt]
+
+            min_coins = float("inf")
             for c in coins:
-                if a >= c:
-                    dp[a] = min(dp[a], dp[a-c]+1)
-        return -1 if dp[-1]==float("inf") else dp[-1]
+                res = dfs(amt - c)
+                if res != float("inf"):
+                    min_coins = min(min_coins, res + 1)
+
+            cache[amt] = min_coins
+            return min_coins
+
+        ans = dfs(amount)
+        return -1 if ans == float("inf") else ans
