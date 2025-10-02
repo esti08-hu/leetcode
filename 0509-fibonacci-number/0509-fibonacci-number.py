@@ -1,15 +1,17 @@
 class Solution:
     def fib(self, n: int) -> int:
-        cache = {}
-        def dfs(x):
-            if x == 0:
-                return 0
-            if x == 1:
-                return 1
+        def dp(x):
+            if n < 2:
+                return n
 
-            if x in cache:
-                return cache[x]
-            cache[x] = self.fib(x-2) + self.fib(x-1)
-            return cache[x]
+            dp = [0, 1]
 
-        return dfs(n)
+            i=2
+            while i <= x:
+                tmp = dp[1]
+                dp[1] = dp[0] + dp[1]
+                dp[0] = tmp
+                i+=1
+            return dp[1]
+        return dp(n)
+        
