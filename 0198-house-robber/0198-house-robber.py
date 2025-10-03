@@ -7,23 +7,24 @@ class Solution:
 
         cache = {}
 
-        def dfs(i):
-            if i == len(nums)-1:
-                return nums[i]
+        def dfs(i, n):
+            if i >= n:
+                return 0
             
             if i in cache:
                 return cache[i]
             
             curr = nums[i]
             res = [0]
-            for j in range(i+2, len(nums)):
-                res.append(dfs(j))
+            for j in range(i+2, n):
+                res.append(dfs(j, n))
             curr+=max(res)
 
             cache[i] = curr
             return curr
         
         ans = 0
+        n = len(nums)
         for i in range(len(nums)):
-            ans = max(ans, dfs(i))
+            ans = max(ans, dfs(i, n))
         return ans
