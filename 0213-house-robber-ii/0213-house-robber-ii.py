@@ -19,8 +19,5 @@ class Solution:
             cache[(i, n)] = max(rob, skip)
             return cache[(i, n)]
         
-        ans = 0
         n = len(nums)
-        ans = max(ans, dfs(0, n-1))
-        ans = max(ans, dfs(1, n))
-        return ans
+        return max(dfs(0, n-1), dfs(1, n))
