@@ -10,24 +10,20 @@ class Solution:
         def dfs(i, n):
             if i >= n:
                 return 0
-            
+
             if (i,n) in cache:
                 return cache[(i,n)]
             
-            curr = nums[i]
-            res = [0]
-            for j in range(i+2, n):
-                res.append(dfs(j, n))
-            curr+=max(res)
-
-            cache[(i, n)] = curr
-            return curr
+            rob = nums[i] + dfs(i+2, n)
+            skip = dfs(i+1, n)
+            cache[(i, n)] = max(rob, skip)
+            return cache[(i, n)]
         
         ans = 0
         n = len(nums)
-        for i in range(len(nums)):
-            if i == 0:
-                ans = max(ans, dfs(i, n-1))
-            else:
-                ans = max(ans, dfs(i, n))
+        # for i in range(len(nums)):
+        #     if i == 0:
+        ans = max(ans, dfs(0, n-1))
+            # else:
+        ans = max(ans, dfs(1, n))
         return ans
