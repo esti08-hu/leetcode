@@ -11,8 +11,8 @@ class Solution:
             if i >= n:
                 return 0
             
-            if i in cache:
-                return cache[i]
+            if (i,n) in cache:
+                return cache[(i,n)]
             
             curr = nums[i]
             res = [0]
@@ -20,7 +20,7 @@ class Solution:
                 res.append(dfs(j, n))
             curr+=max(res)
 
-            cache[i] = curr
+            cache[(i, n)] = curr
             return curr
         
         ans = 0
@@ -28,6 +28,6 @@ class Solution:
         for i in range(len(nums)):
             if i == 0:
                 ans = max(ans, dfs(i, n-1))
-                continue
-            ans = max(ans, dfs(i, n))
+            else:
+                ans = max(ans, dfs(i, n))
         return ans
