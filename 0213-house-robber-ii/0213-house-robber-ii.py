@@ -21,9 +21,6 @@ class Solution:
         
         ans = 0
         n = len(nums)
-        # for i in range(len(nums)):
-        #     if i == 0:
         ans = max(ans, dfs(0, n-1))
-            # else:
         ans = max(ans, dfs(1, n))
         return ans
