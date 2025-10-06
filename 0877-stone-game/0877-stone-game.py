@@ -1,21 +1,21 @@
 class Solution:
     def stoneGame(self, piles: List[int]) -> bool:
         n = len(piles)
-        memo = [[-1]*n for i in range(n)]
 
-        def dfs(i, j):
-            if i==j:
+        cache = {}
+
+        def dp(i, j):
+            if i == j:
                 return piles[i]
             
-            if memo[i][j] != -1:
-                return memo[i][j]
+            if (i, j) in cache:
+                return cache[(i, j)]
 
-            diff1 = piles[i]-dfs(i+1, j)
-            diff2 = piles[j]-dfs(i, j-1)
+            diff1 = piles[i] + dp(i+1, j)
+            diff2 = piles[j] + dp(i, j-1)
 
-            res = max(diff1, diff2)
-            memo[i][j] = res
+            cache[(i, j)] = max(diff1, diff2)
 
-            return memo[i][j]
-            
-        return dfs(0, n-1)>=0
+            return cache[(i, j)]
+
+        return dp(0, n-1) >= 0
