@@ -1,18 +1,14 @@
 class Solution:
     def canArrange(self, arr: List[int], k: int) -> bool:
-        count = defaultdict(int)
-        for num in arr:
-            rem = num % k
-            count[rem] += 1
-        for r in range(k):
-            if r == 0:
-                if count[r] % 2 != 0:
-                    return False
-            elif 2*r == k:
-                if count[r] % 2 != 0:
-                    return False
-            else:
-                if count[r] != count[k - r]:
-                    return False
+        cnt = Counter((x % k) for x in arr)
+        if cnt[0] % 2 != 0:
+            return False
+
+        if k % 2 == 0 and cnt[k // 2] % 2 != 0:
+            return False
+
+        for r in range(1, (k + 1) // 2):
+            if cnt[r] != cnt[k - r]:
+                return False
+
         return True
-        
