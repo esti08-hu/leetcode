@@ -16,7 +16,7 @@ func maxProfit(prices []int, fee int) int {
             skip := dfs(i+1, 0)
             cache[[2]int{i, state}] = max(buy, skip)
         } else if state == 1{
-            sell := dfs(i+1, 0)+prices[i] - free
+            sell := dfs(i+1, 0)+prices[i] - fee
             skip := dfs(i+1, 1)
             cache[[2]int{i, state}] = max(sell, skip)
         }
