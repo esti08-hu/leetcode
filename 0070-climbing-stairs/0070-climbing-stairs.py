@@ -1,15 +1,8 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
-        @cache
-
-        def dp(i):
-            if i < 0:
-                return 0
-            if i == 0:
-                return 1
-            
-            s1 = dp(i-1)
-            s2 = dp(i-2)
-            return s1+s2
+        dp = [0]*(n+1)
+        dp[-1], dp[-2] = 1, 1
+        for i in range(n-2, -1,-1):
+            dp[i] = dp[i+1]+dp[i+2]
         
-        return dp(n)
+        return dp[0]
