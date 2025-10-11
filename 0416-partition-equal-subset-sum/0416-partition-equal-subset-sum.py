@@ -7,21 +7,23 @@ class Solution:
         cache = {}
 
         def dfs(i, t):
-            if t == 0:
+            if t == target:
                 return True
             
-            if t < 0 or i == len(nums):
+            if t > target or i < 0:
                 return False
             
             if (i, t) in cache:
                 return cache[(i, t)]
             
-            inc = dfs(i+1, t-nums[i])
+            inc = dfs(i-1, t+nums[i])
             if inc:
                 return True
-            exc = dfs(i+1, t)
+            exc = dfs(i-1, t)
+            if exc:
+                return True
             
-            cache[(i, t)] = inc or exc
+            cache[(i, t)] = False
             return cache[(i, t)]
         
-        return dfs(0, target)
+        return dfs(len(nums)-1, 0)
