@@ -2,29 +2,26 @@ class Solution:
     def canPartition(self, nums: List[int]) -> bool:
         if sum(nums)%2:
             return False
+
+        target = sum(nums)//2
+        cache = {}
+
+        def dfs(i, t):
+            if t == 0:
+                return True
+            
+            if t < 0 or i == len(nums):
+                return False
+            
+            if (i, t) in cache:
+                return cache[(i, t)]
+            
+            inc = dfs(i+1, t-nums[i])
+            if inc:
+                return True
+            exc = dfs(i+1, t)
+            
+            cache[(i, t)] = inc or exc
+            return cache[(i, t)]
         
-        dp = set()
-        dp.add(0)
-
-        target = sum(nums) // 2
-
-        for i in range(len(nums)-1,-1,-1):
-            nextDP = set()
-
-            for t in dp:
-                if (t + nums[i]) == target:
-                    return True
-                nextDP.add(t + nums[i])
-                nextDP.add(t)
-            dp = nextDP
-        return True if target in dp else False
-        
-            
-            
-
-            
-
-            
-
-
-        
+        return dfs(0, target)
