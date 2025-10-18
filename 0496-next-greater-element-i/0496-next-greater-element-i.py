@@ -1,21 +1,11 @@
 class Solution:
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        stk = []
-        dict_s = {}
-        res = []
-        for n2 in nums2:
-            if not stk:
-                stk.append(n2)
-            else:
-                while stk and stk[-1] < n2:
-                    x = stk.pop()
-                    dict_s[x] = n2
-                stk.append(n2)
-
-        for n in nums1:
-            if n not in dict_s:
-                res.append(-1)
-            else:
-                res.append(dict_s[n])
-        
+        nums2_idx = {nums2[i]:i for i in range(len(nums2))}
+        res = [-1] * len(nums1)
+        for i, n in enumerate(nums1):
+            for j in range(nums2_idx[n]+1, len(nums2)):
+                if nums2[j] > n:
+                    res[i] = nums2[j]
+                    break
         return res
+
