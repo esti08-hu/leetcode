@@ -14,7 +14,7 @@ class Solution:
                 dp[1]=tmp
             
             return max(dp)
-        print(dp1(nums[:-1]), dp1(nums[1:]))
+
+        
         return max(dp1(nums[:-1]), dp1(nums[1:]))
          
-
