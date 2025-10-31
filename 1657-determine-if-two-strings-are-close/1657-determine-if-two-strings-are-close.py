@@ -1,19 +1,14 @@
 class Solution:
     def closeStrings(self, word1: str, word2: str) -> bool:
-        if set(word1) ^ set(word2) != set():
+        if len(word1) != len(word2):
             return False
-        s_w1 = sorted(word1)
-        s_w2 = sorted(word2)
-        d_w1 = set(s_w1)
-        d_w2 = set(s_w2)
-        c_w1 = []
-        c_w2 =[]
-
-        for i in d_w1:
-            c_w1.append(s_w1.count(i))
-
-        for j in d_w2:
-            c_w2.append(s_w2.count(j))
+        if set(word1) != set(word2):
+            return False
             
+        w1_cnt = Counter(word1)
+        w2_cnt = Counter(word2)
 
-        return sorted(c_w1) == sorted(c_w2)
+        w1_cnt_lst = sorted(list(w1_cnt.values()))
+        w2_cnt_lst = sorted(list(w2_cnt.values()))
+
+        return True if w1_cnt_lst == w2_cnt_lst else False
