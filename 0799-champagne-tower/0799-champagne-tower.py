@@ -11,3 +11,4 @@ class Solution:
                     dp[i+1][j+1] += extra
                 
         return min(1, dp[query_row][query_glass])
+ 
