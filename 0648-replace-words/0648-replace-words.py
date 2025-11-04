@@ -1,6 +1,6 @@
 class Trie:
     def __init__(self):
-        self.children = [None] * 26
+        self.children = {}
         self.isEnd = False
 class Solution:
     def __init__(self):
@@ -10,10 +10,9 @@ class Solution:
         for word in set(dictionary):
             curr  = self.root
             for c in word:
-                idx = ord(c) - ord("a")
-                if not curr.children[idx]:
-                    curr.children[idx] = Trie()
-                curr = curr.children[idx]
+                if not curr.children[c]:
+                    curr.children[c] = Trie()
+                curr = curr.children[c]
             curr.isEnd = True
 
         words = sentence.split(" ")
@@ -22,16 +21,13 @@ class Solution:
             track = ""
 
             for c in word:
-                idx = ord(c) - ord("a")
-
-                if curr.children[idx] is None:
+                if curr.children[c] is None:
                     break
                 track += c
-                curr = curr.children[idx]
+                curr = curr.children[c]
 
                 if curr.isEnd:
                     words[i] = track
                     break
-                
+
         return " ".join(map(str, words))
-            
