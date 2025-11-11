@@ -1,45 +1,43 @@
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
-        rows = len(grid) 
-        cols = len(grid[0])
-
-        def inBound(r,c):
-            return(0<=r<rows and 0<=c<cols)
-
-        fresh = 0
-        q = deque()
-
-        for i in range(rows):
-            for j in range(cols):
-                if grid[i][j] == 2:
-                    q.append((i,j))
-                elif grid[i][j] == 1:
-                    fresh += 1
+        if not grid:
+            return 0
         
-        directions = [(0,1), (1,0), (0,-1), (-1,0)]
-        time = 0
-        while q and fresh > 0:
-            len_q =  len(q)
+        ROWS, COLS = len(grid), len(grid[0])
+        visit = set()
+        unvisit = set()
 
-            for _ in range(len_q):
-                r, c = q.popleft()
+        def bfs(r, c):
+            q = collections.deque()
+            q.append((r, c))
+            visit.add((r, c))
 
-                for dr, dc in directions:
-                    nr,nc = r+dr, c+dc
+            time = -1
+            while q:
+                for i in range(len(q)):
+                    row, col = q.popleft()
 
-                    if inBound(nr, nc):
-                        if grid[nr][nc] == 1:
-                            grid[nr][nc]=2
-                            fresh-=1
-                            q.append((nr, nc))
-            time +=1
-        
-        return time if fresh==0 else -1
+                    directions = [[1,0], [-1,0], [0,1], [0,-1]]
+                    for dr, dc in directions:
+                        r, c = row+dr, col+dc
+                        if (r in range(ROWS) and
+                            c in range(COLS) and
+                            (r, c) not in visit and
+                            grid[r][c] == 1):
+                            q.append((r, c))
+                            visit.add((r, c))
+                            if (r, c) in unvisit:
+                                unvisit.remove((r, c))
 
+                time += 1
+            return time
 
+        total = 0
+        for r in range(ROWS):
+            for c in range(COLS):
+                if grid[r][c] == 2:
+                    total+=bfs(r, c)
+                elif grid[r][c] == 1 and (r, c) not in visit:
+                    unvisit.add((r, c))
 
-
-
-
-
-
+        return -1 if unvisit else total
