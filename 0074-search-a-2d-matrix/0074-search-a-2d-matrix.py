@@ -1,30 +1,24 @@
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        n, m = len(matrix), len(matrix[0])
+        """
+        row = 0 col = 3
+        if (0, 3) < target:
+            row += 1
+        if (row, col) > taret:
+            row-=1
+        else:
+            return True
+        """
 
-        col = []
+        row, col = len(matrix), len(matrix[0])
+        r, c = 0, col-1
 
-        for i in range(n):
-            col.append(matrix[i][0])
-
-        idx = bisect_right(col, target)-1
-        row = matrix[idx]            
-
-        low, high = 0, len(row)-1
-
-        while low <= high:
-            mid = (low+high)//2
-
-            if row[mid] > target:
-                high = mid-1
-            elif row[mid] < target:
-                low = mid +1 
-            else: 
+        while r < row and c >= 0:
+            if matrix[r][c] < target:
+                r+=1
+            elif matrix[r][c] > target:
+                c-=1
+            else:
                 return True
         
         return False
-
-
-        
-
-
