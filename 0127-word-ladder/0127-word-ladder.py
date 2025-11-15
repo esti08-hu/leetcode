@@ -2,28 +2,37 @@ class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
         if endWord not in wordList:
             return 0
+        
+        adjList = defaultdict(list)
+        wordList.append(beginWord)
+        n = len(wordList)
 
-        L = len(beginWord)
-        all_combo_dict = defaultdict(list)
+        for i in range(n-1):
+            for j in range(i+1, n):
+                cnt = 0
+                for k in range(len(wordList[j])):
+                    if wordList[i][k] != wordList[j][k]:
+                        cnt += 1
+                if cnt == 1:
+                    adjList[wordList[i]].append(wordList[j])
+                    adjList[wordList[j]].append(wordList[i])
+        
+        q = deque()
+        q.append(beginWord)
+        visited = set()
+        visited.add(beginWord)
 
-        for word in wordList:
-            for i in range(L):
-                pattern = word[:i] + "*" + word[i+1:]
-                all_combo_dict[pattern].append(word)
-        print(all_combo_dict)
-
-        queue = deque([(beginWord, 1)])
-        visited = set([beginWord])
-
-        while queue:
-            word, level = queue.popleft()
-            for i in range(L):
-                pattern = word[:i] + "*" + word[i+1:]
-                for next_word in all_combo_dict[pattern]:
-                    if next_word == endWord:
-                        return level + 1
-                    if next_word not in visited:
-                        visited.add(next_word)
-                        queue.append((next_word, level + 1))
-                all_combo_dict[pattern] = []
+        path = 1
+        while q:            
+            for i in range(len(q)):
+                node = q.popleft()
+                for nei in adjList[node]:
+                    if nei == endWord:
+                        return path + 1
+                    if nei not in visited:
+                        q.append(nei)   
+                        visited.add(nei)
+            
+            path+=1
         return 0
+
