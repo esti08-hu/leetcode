@@ -1,28 +1,24 @@
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
-        phone = defaultdict(str)
-        k = 0
-        for i in range(2, 10):
-            for j in range(3):
-                phone[str(i)]+=(chr(k+ord('a')))
-                k+=1
-            if i == 7 or i == 9:
-                phone[str(i)]+=(chr(k+ord('a')))
-                k+=1
+        phone = {'2': "abc", '3': "def", '4': "ghi", '5': "jkl",
+                 '6': "mno", '7': "pqrs", '8': "tuv", '9': "wxyz"}
 
-        res = []
-        def backtrack(index, current_combination):
-            if index == len(digits):
-                res.append(current_combination)
-                return
+        combination = [""]
 
-            letters = phone[digits[index]]
-
-            for letter in letters:
-                backtrack(index+1, current_combination+letter)
+        for digit in digits:
+            new_combination = []
+            for comb in combination:
+                letters = phone[digit]
+                for letter in letters:
+                    new_combination.append(comb+letter)
             
-        backtrack(0, "")
-        return res
+            combination = new_combination
+        
+        return combination
+
+
+
+        
         
 
         
