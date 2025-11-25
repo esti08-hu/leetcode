@@ -1,13 +1,18 @@
 class Solution:
     def numTrees(self, n: int) -> int:
-        dp = [0] * (n+1)
-        dp[0] = 1
-        dp[1] = 1
+        @lru_cache(None)
 
-        for nodes in range(2, n + 1):
-            for root in range(1, nodes + 1):
+        def count(nodes):
+            if nodes <= 1:
+                return 1
+            
+            ways = 0
+
+            for root in range(1, nodes+1):
                 left = root - 1
                 right = nodes - root
-                dp[nodes] += dp[left] * dp[right]
-        
-        return dp[n]
+
+                ways += count(left) * count(right)
+            return ways
+
+        return count(n)
