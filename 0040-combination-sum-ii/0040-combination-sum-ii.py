@@ -10,13 +10,10 @@ class Solution:
                 res.append(curr_list[:])
                 return 
             
-            num_set = set()
-
             for i in range(idx, len(candidates)):
-                if candidates[i] in num_set:
+                if i > idx and candidates[i] == candidates[i - 1]:
                     continue
 
-                num_set.add(candidates[i])
                 curr_list.append(candidates[i])
                 dfs(i+1, s+candidates[i], curr_list)
                 curr_list.pop()
