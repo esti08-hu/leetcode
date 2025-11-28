@@ -26,7 +26,7 @@ class Solution:
                             if self.flag and grid2[nr][nc] and not grid1[nr][nc]:
                                 self.flag = False
 
-        self.sub_islands = 0
+        sub_islands = 0
         for i in range(rows):
             for j in range(cols):
                 if grid1[i][j] and grid2[i][j] and (i, j) not in visited:
@@ -34,6 +34,6 @@ class Solution:
                     bfs(i, j)
 
                     if self.flag:
-                        self.sub_islands += 1
+                        sub_islands += 1
                     
-        return self.sub_islands
+        return sub_islands
