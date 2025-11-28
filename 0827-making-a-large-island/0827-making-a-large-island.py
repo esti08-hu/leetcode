@@ -51,7 +51,10 @@ class Solution:
                     
                     for dr, dc in directions:
                         nr, nc = r+dr, c+dc
-                        if nr in range(rows) and nc in range(cols) and grid[nr][nc] in island_dict and grid[nr][nc] not in added:
+                        if (nr in range(rows) and 
+                            nc in range(cols) and 
+                            grid[nr][nc] in island_dict and 
+                            grid[nr][nc] not in added):
                                 curr_area += island_dict[grid[nr][nc]]
                                 added.add(grid[nr][nc])
                     max_area = max(max_area, curr_area)
