@@ -1,8 +1,5 @@
 class Solution:
     def largestIsland(self, grid: List[List[int]]) -> int:
-        '''
-        
-        '''
         rows, cols = len(grid), len(grid[0])
         def bfs(r, c, isl_num):
             q = deque()
