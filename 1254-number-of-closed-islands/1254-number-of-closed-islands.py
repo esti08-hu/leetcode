@@ -1,36 +1,48 @@
 class Solution:
     def closedIsland(self, grid: List[List[int]]) -> int:
-        '''
-        island never in border
-        if grid val == 0 and on border 
-            valid = False
-        '''
+        
         rows, cols = len(grid), len(grid[0])
-        visited = set()
 
-        def dfs(r, c):
-            if (grid[r][c] or (r, c) in visited):
-                return 
-            visited.add((r, c))
+        def bfs(r, c):
+            q = deque()
+            q.append((r, c))
+            grid[r][c] = 1
 
-            directions = [[1,0], [-1,0], [0,1], [0,-1]]
-            for dr, dc in directions:
-                nr, nc = dr+r, dc+c
-                if nr < 0 or nc < 0 or nr == rows or nc == cols:
-                    continue
-                if not grid[nr][nc] and self.valid and (nr == 0 or nr == rows-1 or nc == 0 or nc == cols-1):
-                    self.valid = False
-                    
-                dfs(nr, nc)
+            while q:
+                for i in range(len(q)):
+                    row, col = q.popleft()
 
+                    directions = [[1,0], [-1,0], [0,1], [0,-1]]
+                    for dr, dc in directions:
+                        nr, nc = row+dr, col+dc
+                        if (nr in range(rows) and 
+                            nc in range(cols) and 
+                            not grid[nr][nc]):
+                            q.append((nr, nc))
+                            grid[nr][nc] = 1
+
+        for r in range(rows):
+            if not grid[r][0]:
+                bfs(r, 0)
+
+        for r in range(rows):
+            if not grid[r][cols-1]:
+                bfs(r, cols-1)
+
+        for c in range(cols):
+            if not grid[0][c]:
+                bfs(0, c)
+
+        for c in range(cols):
+            if not grid[rows-1][c]:
+                bfs(rows-1, c)
+        
         closed_island = 0
+
         for r in range(1, rows-1):
             for c in range(1, cols-1):
-                if not grid[r][c] and (r, c) not in visited:
-                    self.valid = True
-                    dfs(r, c)
-                    if self.valid:
-                        closed_island += 1
+                if not grid[r][c]:
+                    bfs(r, c)
+                    closed_island += 1
         
         return closed_island
-
