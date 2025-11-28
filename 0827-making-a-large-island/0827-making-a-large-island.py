@@ -4,7 +4,6 @@ class Solution:
         def bfs(r, c, isl_num):
             q = deque()
             q.append((r, c))
-            self.main_visited.add((r, c))
             grid[r][c] = isl_num
             curr_area = 1
 
@@ -16,23 +15,20 @@ class Solution:
                         nr, nc = row+dr, col+dc
                         if (nr in range(rows) and 
                             nc in range(cols) and 
-                            (nr, nc) not in self.main_visited and 
-                            grid[nr][nc]):
+                            grid[nr][nc] == 1):
 
                             q.append((nr, nc))
-                            self.main_visited.add((nr, nc))
                             grid[nr][nc] = isl_num
                             curr_area += 1
 
             return curr_area
             
-        isl_num = 1
+        isl_num = 2
         island_dict = {}
-        self.main_visited = set()
         flag = False
         for r in range(rows):
             for c in range(cols):
-                if grid[r][c] and (r, c) not in self.main_visited:
+                if grid[r][c] == 1:
                     area = bfs(r, c, isl_num)
                     island_dict[isl_num] = area
                     isl_num+=1
