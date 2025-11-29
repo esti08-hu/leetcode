@@ -6,11 +6,10 @@
 #         self.right = right
 class Solution:
     def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
-
         self.res = 0
         def dfs(root):
             if not root:
-                return 0
+                return
             
             if root.left and not root.left.left and not root.left.right:
                 self.res += root.left.val
@@ -18,6 +17,5 @@ class Solution:
             dfs(root.left)
             dfs(root.right)
 
-            return self.res
-
-        return dfs(root)
+        dfs(root)
+        return self.res
