@@ -28,7 +28,9 @@ if curr_hour < hour => ans = mid; mx = mid
 return ans
 
         '''
-        mx = 10**7 + 1
+        if hour <= len(dist) - 1:
+            return -1
+        mx = 10**7
         mn = 1
 
         ans = -1
@@ -41,10 +43,9 @@ return ans
                 else:
                     curr_hour+=math.ceil(dist[i]/mid)
 
-            if curr_hour <= hour:
+            if curr_hour > hour:
+                mn = mid + 1
+            else:
                 mx = mid
 
-            elif curr_hour*100 > hour*100:
-                mn = mid + 1
-
-        return mn if mn < 10**7+1 else -1
+        return mn
