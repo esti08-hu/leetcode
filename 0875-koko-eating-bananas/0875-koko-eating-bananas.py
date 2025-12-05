@@ -1,23 +1,36 @@
 class Solution:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
-        low, high = 1, max(piles)
+        # if len(piles) > h:
+        #     return 
+        '''
+        mn = 1
+        mx = max(piles)
 
-        best = -1
-
-        while low <= high:
-            mid = (low+high)//2
-            #calculate the hour for the mid speed 
-            cal_h = 0
-            for pile in piles:
-                cal_h+=math.ceil(pile/mid)
+        check(mid)
+            curr_hour = 0
+            for i in range(len(piles))
+                curr_hour += math.ceil(piles[i]/mid)
+                if curr_hour > h:
+                    return False
             
+            return True
+            
+        '''
+        def check(mid):
+            curr_hour = 0
+            for i in range(len(piles)):
+                curr_hour += math.ceil(piles[i]/mid)
+                if curr_hour > h:
+                    return False
+            return True
 
-            if cal_h <= h:
-                high = mid - 1
-                best = mid
+        mn, mx = 1, max(piles)
 
+        while mn <= mx:
+            mid = (mn + mx) // 2
+            if check(mid):
+                mx = mid - 1
             else:
-                low = mid + 1
-        return best 
-
-
+                mn = mid + 1
+        
+        return mn
