@@ -3,7 +3,7 @@ class Solution:
         def check(mid):
             total = mid//a + mid//b + mid//c - mid//ab - mid//ac - mid//bc + mid//abc
             return total >= n
-            
+
         def lcm(x, y):
             return x * y // math.gcd(x, y)
         
@@ -14,7 +14,7 @@ class Solution:
 
         l, r = 1, 2 * 10**9
         while l < r:
-            mid = (l + r) // 2
+            mid = (l + r) >> 1
             if check(mid):
                 r = mid
             else:
