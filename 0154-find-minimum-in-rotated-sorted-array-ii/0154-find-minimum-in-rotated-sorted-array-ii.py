@@ -1,26 +1,17 @@
 class Solution:
     def findMin(self, nums: List[int]) -> int:
-      '''
-      0 1 2 3 4 5 6
-      0,1,4,4,5,6,7
-           
-      1 => 1,4,4,5,6,7,0
-      2 => 4,4,5,6,7,0,1
-      3 => 4,5,6,7,0,1,4
-    
-      1 1 1 2 3 3 4 5 6 6
-      |                 |
-      3 3 4 5 6 6 1 1 1 2
-      1 1 1 2 3
+        left, right = 0, len(nums) - 1
 
-      1 1 2 3 1
+        while left < right:
+            mid = (left + right) // 2
 
-      2 3 1 1 1
-      l   m   r
-      1 1 1 4 1
-      1
-      mid = 6
-      r = 2
-      l = 3
-      '''  
-      return min(nums)
+            if nums[mid] > nums[right]:
+                left = mid + 1
+            elif nums[mid] < nums[right]:
+                right = mid
+            else:
+                right -= 1
+                while left < right and nums[right] == nums[right - 1]:
+                    right -= 1
+
+        return nums[left]
