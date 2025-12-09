@@ -1,19 +1,33 @@
 class Solution:
     def maxArea(self, height: List[int]) -> int:
-        left = 0
-        right = len(height) - 1
-        max_area = 0
+        '''
+
+        |               |
+        1,8,6,2,5,4,8,3,7
+        width = len(height)-1 = 8-1
+        max_ant = min(l, r) * width
+
+        if l > r:
+            r -= 1
+        else:
+            l += 1
         
-        while left < right:
-            min_height = min(height[left], height[right])
-            width = right - left
-            area = min_height * width
-            
-            max_area = max(max_area, area)
-            
-            if height[left] < height[right]:
-                left += 1
+        width -= 1
+
+
+        '''
+
+        l, r = 0, len(height) - 1
+        width = len(height) - 1
+        max_amt = 0
+        while l < r:
+            max_amt = max(max_amt, min(height[l], height[r]) * width)
+
+            if height[l] > height[r]:
+                r -= 1
             else:
-                right -= 1
-        
-        return max_area
+                l += 1
+            
+            width -= 1
+
+        return max_amt
