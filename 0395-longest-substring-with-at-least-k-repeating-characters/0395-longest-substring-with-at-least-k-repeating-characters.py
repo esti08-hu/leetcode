@@ -1,29 +1,25 @@
 class Solution:
     def longestSubstring(self, s: str, k: int) -> int:
-        def dfs(l, r):
-            if r - l < k:
-                return 0
-            
-            freq = [0] * 26
-            for i in range(l, r):
-                freq[ord(s[i]) - ord('a')] += 1
-            
-            split_char = None
+        max_len = 0
 
-            for i in range(26):
-                if 0 < freq[i] < k:
-                    split_char = chr(i + ord('a'))
-                    break
-            
-            if split_char is None:
-                return r - l
-            
-            max_len = 0
-            start = l
-            for i in range(l, r):
-                if s[i] == split_char:
-                    max_len = max(max_len, dfs(start, i))
-                    start = i+1
-            max_len = max(max_len, dfs(start, r))
-            return max_len
-        return dfs(0, len(s))
+        for t in range(1, 27):
+            cnt = [0] * 26
+            left = 0
+            distinct = 0
+            satisfied = 0
+            for right in range(len(s)):
+                idx = ord(s[right]) - ord('a')
+                if cnt[idx] == 0: distinct += 1
+                cnt[idx] += 1
+                if cnt[idx] == k: satisfied += 1
+
+                while distinct > t:
+                    idxL = ord(s[left]) - ord('a')
+                    if cnt[idxL] == k: satisfied -= 1
+                    cnt[idxL] -= 1
+                    if cnt[idxL] == 0: distinct -= 1
+                    left += 1
+                
+                if distinct == t and distinct == satisfied:
+                    max_len = max(max_len, right - left + 1)
+        return max_len
