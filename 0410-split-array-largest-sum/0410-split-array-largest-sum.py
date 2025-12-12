@@ -1,31 +1,34 @@
 class Solution:
     def splitArray(self, nums: List[int], k: int) -> int:
-        def canSplit(nums, k, max_sum):
-            current_sum = 0
-            subarrays = 1 
+        '''
+        32 - 7 
+        7 9 14 24 32
+        7 32 - 7 25
+        7 32 - 9 23
+        14 32-14 18
+        24 32 - 24
 
-            for num in nums:
-                if current_sum + num > max_sum:
-                    subarrays += 1
-                    current_sum = num
-                    if subarrays > k: 
-                        
-                        return False
-                else:
-                    current_sum += num
-            return True
+        left, right = 0, sum(nums)=>32
+        '''
+
+        def check(mid):
+            count = 1
+            curr = 0
+            for i in range(len(nums)):
+                curr += nums[i]
+                if curr > mid:
+                    count += 1
+                    curr = nums[i]
+
+            return count
 
         left, right = max(nums), sum(nums)
-        res = right
 
         while left <= right:
             mid = (left + right) // 2
-            if canSplit(nums, k, mid):
-                res = mid 
-                
-                right = mid - 1 
-                
+            if check(mid) <= k:
+                right = mid - 1
             else:
-                left = mid + 1 
-                
-        return res
+                left = mid + 1
+
+        return left
