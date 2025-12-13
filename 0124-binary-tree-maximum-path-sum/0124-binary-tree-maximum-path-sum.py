@@ -15,7 +15,7 @@ class Solution:
             left = dfs(root.left)
             right = dfs(root.right)
 
-            self.max_path = max(self.max_path, root.val + left + right, root.val + left, root.val + right, root.val)
+            self.max_path = max(self.max_path, root.val + left + right, root.val + left, root.val + right)
             if max(left, right) < 0:
                 return root.val
                 
