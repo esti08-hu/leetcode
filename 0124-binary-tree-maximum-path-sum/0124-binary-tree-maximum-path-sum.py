@@ -10,16 +10,18 @@ class Solution:
 
         def dfs(root):
             if not root:
-                return 0
+                return float("-inf")
             
             left = dfs(root.left)
             right = dfs(root.right)
-
-            self.max_path = max(self.max_path, root.val + left + right, root.val + left, root.val + right)
-            if max(left, right) < 0:
-                return root.val
-                
-            return root.val + max(left, right)
-        
+            if root.left or root.right:
+                self.max_path = max(self.max_path, left, left + root.val, right + root.val, right, root.val, left + right + root.val)
+            if not root.left and not root.right:
+                self.max_path = max(self.max_path, root.val)
+            curr_max = max(root.val, root.val+left, root.val+right)
+            if curr_max < 0:
+                return float("-inf")
+            else:
+                return curr_max
         dfs(root)
         return self.max_path
