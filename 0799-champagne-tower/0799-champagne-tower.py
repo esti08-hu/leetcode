@@ -1,14 +1,18 @@
 class Solution:
     def champagneTower(self, poured: int, query_row: int, query_glass: int) -> float:
-        dp = [[0.0] * (i + 1) for i in range(query_row + 1)]
-        dp[0][0] = poured
+        @cache
 
-        for i in range(query_row):
-            for j in range(i+1):
-                if dp[i][j] > 1:
-                    extra = (dp[i][j]-1)/2.0
-                    dp[i+1][j] += extra
-                    dp[i+1][j+1] += extra
-                
-        return min(1, dp[query_row][query_glass])
- 
+        def dfs(r, c):
+            if r < 0 or c < 0 or c > r:
+                return 0
+            if r == 0 and c == 0:
+                return poured
+            
+            left = dfs(r-1, c-1)
+            right = dfs(r-1, c)
+            
+            left_overflow = max(0, left-1)
+            right_overflow = max(0, right-1)
+            return max((left_overflow + right_overflow)/2, 0)
+        res = dfs(query_row, query_glass)
+        return 1 if res > 1 else res
