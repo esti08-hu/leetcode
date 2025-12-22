@@ -6,21 +6,18 @@
 #         self.right = right
 class Solution:
     def rob(self, root: Optional[TreeNode]) -> int:
-
         @cache
-        def dfs(node):
-            if not node:
+        def dfs(root):
+            if not root:
                 return 0
+            
+            skip = dfs(root.left) + dfs(root.right)
+            rob = root.val
+            if root.left:
+                rob += (dfs(root.left.left) + dfs(root.left.right))
+            if root.right:
+                rob += (dfs(root.right.left) + dfs(root.right.right))
 
-            nl = 0
-            nr = 0
-            if node.left:
-                nl = max(nl, dfs(node.left.left) + dfs(node.left.right))
-
-            if node.right:
-                nr = max(nr, dfs(node.right.right) + dfs(node.right.left))
-
-            res = max(node.val + nl+ nr, dfs(node.left) + dfs(node.right))
-
-            return res
+            return max(skip, rob)
+        
         return dfs(root)
