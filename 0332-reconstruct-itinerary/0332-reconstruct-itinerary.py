@@ -22,7 +22,7 @@ class Solution:
             graph[f] = sorted(d, reverse=True)
         
         res = []
-        print(graph)
+
         def dfs(f):
             while graph[f]:
                 curr = graph[f].pop()
