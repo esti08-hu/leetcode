@@ -9,9 +9,10 @@ class Solution:
                 for k in range(len(points)):
                     if k == i or k == j: continue
                     x3, y3 = points[k]
-                    area = 0.5*abs(x1*(y2-y3) + x2*(y3-y1) + x3*(y1-y2))
-                    max_area = max(max_area, area)
+                    area = abs(x1*(y2-y3) + x2*(y3-y1) + x3*(y1-y2))
+                    if area > max_area:
+                        max_area = area
         
-        return max_area
+        return max_area * 0.5
 
 
