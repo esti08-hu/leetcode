@@ -1,9 +1,17 @@
 class Solution:
     def largestTriangleArea(self, points: List[List[int]]) -> float:
-        max_x, max_y = 0, 0
-
-        for x, y in points:
-            max_x = max(x, max_x)
-            max_y = max(y, max_y)
+        max_area = 0
+        for i in range(len(points)):
+            x1,y1 = points[i]
+            for j in range(len(points)):
+                if j == i: continue
+                x2, y2 = points[j]
+                for k in range(len(points)):
+                    if k == i or k == j: continue
+                    x3, y3 = points[k]
+                    area = 0.5*abs(x1*(y2-y3) + x2*(y3-y1) + x3*(y1-y2))
+                    max_area = max(max_area, area)
         
-        return max_x * max_y / 2
+        return max_area
+
+
