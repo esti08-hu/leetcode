@@ -1,18 +1,18 @@
 class MyHashSet:
 
     def __init__(self):
-        self.hashSet = []        
+        self.hashSet = [0] * (10**6 + 1)
 
     def add(self, key: int) -> None:
-        if key not in self.hashSet:
-            self.hashSet.append(key)
+        if not self.hashSet[key]:
+            self.hashSet[key] = key
         
     def remove(self, key: int) -> None:
-        if key in self.hashSet:
-            self.hashSet.remove(key)
+        if self.hashSet[key]:
+            self.hashSet[key] = 0
 
     def contains(self, key: int) -> bool:
-        return key in self.hashSet
+        return self.hashSet[key] != 0
 
         
 
