@@ -7,5 +7,5 @@ class Solution:
             graph[v-1].append(u-1)
 
         for node, nei in enumerate(graph):
-            if len(nei) > 2:
+            if len(nei) >= 2:
                 return node + 1
