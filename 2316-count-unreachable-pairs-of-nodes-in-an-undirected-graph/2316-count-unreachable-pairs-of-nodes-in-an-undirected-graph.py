@@ -7,31 +7,24 @@ class Solution:
         
         visited = set()
         def dfs(node):
-            if node in visited:
-                return 0
-
             visited.add(node)
             count = 1
 
             for nei in graph[node]:
                 if nei not in visited:
-                    count += dfs(nei)    
+                    count += dfs(nei) 
 
             return count
-        res = []
+        component_sizes = []
         for node in range(n):
             if node not in visited:
-                count = dfs(node)
-                res.append(count)
-                visited.add(node)
+                size = dfs(node)
+                component_sizes.append(size)
 
-        if len(res) == 1:
-            return 0
-        else:
-            total = 0
-            rem = n
-            for i in res:
-                rem -= i
-                total += i * rem
+        total = 0
+        rem = n
+        for size in component_sizes:
+            rem -= size
+            total += size * rem
         return total
 
