@@ -16,7 +16,7 @@ class Solution:
 
             for dr, dc in directions:
                 nr, nc = r + dr, c + dc
-                if nr in range(rows) and nc in range(cols) :
+                if 0 <= nr < rows and 0 <= nc < cols:
                     nd = max(d, abs(heights[r][c] - heights[nr][nc]))
                     if nd < dist[nr][nc]:
                         dist[nr][nc] = nd
