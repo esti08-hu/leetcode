@@ -1,23 +1,27 @@
 class Solution:
     def minimumEffortPath(self, heights: List[List[int]]) -> int:
-        n = len(heights)
-        rows, cols = len(heights), len(heights[0])
+        rows, cols = len(heights), len(heights)
+        
         dist = [[float("inf")] * cols for _ in range(rows)]
         dist[0][0] = 0
-
+        
         min_heap = [(0, 0, 0)]
-        directions = [(0,1), (0, -1), (1, 0), (-1, 0)]
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
         
         while min_heap:
-            d, r, c = heapq.heappop(min_heap)
-
-            if r == rows-1 and c == cols-1:
-                return d
-
+            effort, r, c = heapq.heappop(min_heap)
+            
+            if r == rows - 1 and c == cols - 1:
+                return effort
+            
             for dr, dc in directions:
                 nr, nc = r + dr, c + dc
+                
                 if 0 <= nr < rows and 0 <= nc < cols:
-                    nd = max(d, abs(heights[r][c] - heights[nr][nc]))
-                    if nd < dist[nr][nc]:
-                        dist[nr][nc] = nd
-                        heapq.heappush(min_heap, (nd, nr, nc))
+                    new_effort = max(effort, abs(heights[r][c] - heights[nr][nc]))
+
+                    if new_effort < dist[nr][nc]:
+                        dist[nr][nc] = new_effort
+                        heapq.heappush(min_heap, (new_effort, nr, nc))
+        
+        return 0
