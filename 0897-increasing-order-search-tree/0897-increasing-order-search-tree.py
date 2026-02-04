@@ -6,20 +6,20 @@
 #         self.right = right
 class Solution:
     def increasingBST(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        def inorder(root):
-            if not root:
-                return 
-            
-            inorder(root.left)
-
-            self.prev.right = root
-            root.left = None
-            self.prev = root
-
-            inorder(root.right)
-        
         dummy = TreeNode(0)
         self.prev = dummy
+        def inorder(root):
+            if not root:
+                return
+            
+            inorder(root.left)
+            
+            self.prev.right = root
+            self.prev = root
+            root.left = None
+            
+            inorder(root.right)
+        
         inorder(root)
-
+        
         return dummy.right
