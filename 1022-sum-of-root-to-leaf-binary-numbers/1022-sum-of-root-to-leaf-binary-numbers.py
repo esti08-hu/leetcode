@@ -6,29 +6,20 @@
 #         self.right = right
 class Solution:
     def sumRootToLeaf(self, root: Optional[TreeNode]) -> int:
-        def bin_int(b):
-            total = 0
-            b = b[::-1]
-            for i in range(len(b)):
-                if b[i] == "1":
-                    total += 2**i
-            return total
-
         self.res = 0
-
-        def preorder(root, curr):
+        def preorder(root, curr_val):
             if not root:
                 return 
+            
+            curr_val = curr_val * 10 + root.val
 
             if not root.left and not root.right:
-                curr_ = curr + str(root.val)
-
-                self.res += bin_int(list(curr_))
+                self.res += int(str(curr_val), 2)
                 return 
 
-            preorder(root.left, curr+str(root.val))
-            preorder(root.right, curr+str(root.val))
+            preorder(root.left, curr_val)
+            preorder(root.right, curr_val)
 
-        preorder(root, "")
+        preorder(root, 0)
 
         return self.res
