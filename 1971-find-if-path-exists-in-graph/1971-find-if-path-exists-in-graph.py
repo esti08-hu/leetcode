@@ -1,23 +1,25 @@
 class Solution:
     def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
-        graph = [[] for _ in range(n)]
-        
-        for i, j in edges:
-            graph[i].append(j)
-            graph[j].append(i)
-        
-        visited = set()
-        def dfs(node):
-            if node == destination:
-                return True
-            
-            visited.add(node)
+        if source == destination:
+            return True
 
-            for adj in graph[node]:
-                if adj not in visited:
-                    if dfs(adj):
+        graph = [[] for _ in range(n)]
+        for u, v in edges:
+            graph[u].append(v)
+            graph[v].append(u)
+        
+        q = deque({source})
+        visited = set({source})
+        while q:
+            for i in range(len(q)):
+                node = q.popleft()
+
+                for nei in graph[node]:
+                    if nei == destination:
                         return True
-            
-            return False
-    
-        return dfs(source)
+
+                    if nei not in visited:
+                        q.append(nei)
+                        visited.add(nei)
+        
+        return False
