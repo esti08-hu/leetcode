@@ -7,7 +7,7 @@
 class Solution:
     def convertBST(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         if not root:
-            return []
+            return root
         self.accum = 0
         def dfs(root):
             if not root:
