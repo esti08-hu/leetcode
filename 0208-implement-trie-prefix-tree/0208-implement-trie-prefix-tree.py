@@ -1,38 +1,42 @@
+class TrieNode():
+    def __init__(self):
+        self.node = [0] * 26
+        self.isEnd = False
 class Trie:
+    def convert(slef, ch):
+        return ord(ch)-ord('a')
 
     def __init__(self):
-        self.root = {}
+        self.root = TrieNode()
 
     def insert(self, word: str) -> None:
         curr = self.root
-
-        for c in word:
-            idx = ord(c) - ord("a")
-            if idx not in curr:
-                curr[idx] = {}
-            curr = curr[idx]
-        curr['*'] = ''
+        for i in range(len(word)):
+            idx = self.convert(word[i])
+            if not curr.node[idx]:
+                new_node = TrieNode()
+                curr.node[idx] = new_node
+            curr = curr.node[idx]
         
+        curr.isEnd = True
 
     def search(self, word: str) -> bool:
         curr = self.root
-
-        for c in word:
-            idx = ord(c) - ord("a")
-            if idx not in curr:
+        for i in range(len(word)):
+            idx = self.convert(word[i])
+            if not curr.node[idx]:
                 return False
-            curr = curr[idx]
-        return "*" in curr
+            curr = curr.node[idx]
         
-
+        return curr.isEnd
+    
     def startsWith(self, prefix: str) -> bool:
         curr = self.root
-
-        for c in prefix:
-            idx = ord(c) - ord("a")
-            if idx not in curr:
+        for i in range(len(prefix)):
+            idx = self.convert(prefix[i])
+            if not curr.node[idx]:
                 return False
-            curr = curr[idx]
+            curr = curr.node[idx]
         
         return True
         
