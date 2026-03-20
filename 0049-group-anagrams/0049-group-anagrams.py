@@ -3,11 +3,7 @@ class Solution:
         hashMap = defaultdict(list)
 
         for s in strs:
-            curr = []
-            for c in s:
-                curr.append(c)
-            curr.sort()
-            curr = "".join(curr)
-            hashMap[curr].append(s)
+            key = "".join(sorted(s))
+            hashMap[key].append(s)
         
         return list(hashMap.values())
