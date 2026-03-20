@@ -1,11 +1,20 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        anagrams = {}
-        for word in strs:
-            count = [0] * 26
-            for ch in word:
-                count[ord(ch) - ord("a")] += 1
-            
-            key = tuple(count)
-            anagrams.setdefault(key, []).append(word)
-        return list(anagrams.values())
+        hashMap = defaultdict(list)
+
+        for s in strs:
+            curr = []
+            for c in s:
+                curr.append(c)
+            curr.sort()
+            curr = "".join(curr)
+            if curr not in hashMap:
+                hashMap[curr].append(s)
+            else:
+                hashMap[curr].append(s)
+        
+        res = []
+        for v in hashMap.values():
+            res.append(v)
+        
+        return res
