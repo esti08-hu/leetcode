@@ -8,10 +8,7 @@ class Solution:
                 curr.append(c)
             curr.sort()
             curr = "".join(curr)
-            if curr not in hashMap:
-                hashMap[curr].append(s)
-            else:
-                hashMap[curr].append(s)
+            hashMap[curr].append(s)
         
         res = []
         for v in hashMap.values():
