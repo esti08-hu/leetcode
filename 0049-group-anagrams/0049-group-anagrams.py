@@ -10,8 +10,4 @@ class Solution:
             curr = "".join(curr)
             hashMap[curr].append(s)
         
-        res = []
-        for v in hashMap.values():
-            res.append(v)
-        
-        return res
+        return list(hashMap.values())
