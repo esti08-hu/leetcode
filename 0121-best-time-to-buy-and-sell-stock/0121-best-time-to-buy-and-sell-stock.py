@@ -4,7 +4,7 @@ class Solution:
         profit = 0
 
         for sell in prices[1:]:
-            buy = min(buy, sell)
             profit = max(profit, sell - buy)
+            buy = min(buy, sell)
         
         return profit
