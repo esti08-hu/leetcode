@@ -1,19 +1,33 @@
+from typing import List
+
 class Solution:
     def maximumGap(self, nums: List[int]) -> int:
-        count_sort = [0]*(max(nums)+1)
-
-        for n in nums:
-            count_sort[n] += 1
+        if len(nums) < 2:
+            return 0
         
-        nums = []
-        for i in range(len(count_sort)):
-            if count_sort[i]:
-                for j in range(count_sort[i]):
-                    nums.append(i)
+        min_val, max_val = min(nums), max(nums)
+        n = len(nums)
+        
+        if min_val == max_val:
+            return 0
+        
+        bucket_size = max(1, (max_val - min_val) // (n - 1))
+        bucket_count = (max_val - min_val) // bucket_size + 1
+        
+        buckets = [[float('inf'), float('-inf')] for _ in range(bucket_count)]
+        
+        for num in nums:
+            idx = (num - min_val) // bucket_size
+            buckets[idx][0] = min(buckets[idx][0], num)
+            buckets[idx][1] = max(buckets[idx][1], num)
         
         max_gap = 0
-
-        for i in range(1, len(nums)):
-            max_gap = max(max_gap, nums[i]-nums[i-1])
+        prev_max = min_val
+        
+        for bucket_min, bucket_max in buckets:
+            if bucket_min == float('inf'):
+                continue
+            max_gap = max(max_gap, bucket_min - prev_max)
+            prev_max = bucket_max
         
         return max_gap
