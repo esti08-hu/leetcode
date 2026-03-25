@@ -8,12 +8,13 @@ class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
         if not head:
             return False
-        curr = head
+        fast, slow = head, head
 
-        while curr.next:
-            if curr.val == float("inf"):
+        while fast.next:
+            fast = fast.next.next
+            slow = slow.next
+
+            if fast == slow:
                 return True
-            curr.val = float("inf")
-            curr = curr.next
-        
+            
         return False
