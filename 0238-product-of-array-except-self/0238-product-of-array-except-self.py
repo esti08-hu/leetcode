@@ -1,16 +1,24 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        length = len(nums)
-        ans = [0] * length
+        prod = math.prod(nums)
+        if prod == 0:
+            answer = [0]*len(nums)
+            zero = [0, 0]
+            p = 1
 
-        ans[0] = 1
-        for i in range(1, length):
-            ans[i] = ans[i - 1] * nums[i - 1]
+            for i in range(len(nums)):
+                if nums[i] == 0:
+                    zero[0] += 1
+                    if zero[0] > 1:
+                        return answer
+                    zero[1] = i
+                else:
+                    p *= nums[i]
+            answer[zero[1]] = p
 
-            
-        right_product = 1
-        for i in range(length - 1, -1, -1):
-            ans[i] *= right_product
-            right_product *= nums[i]
-
-        return ans
+            return answer
+        else:
+            answer = []
+            for num in nums:
+                answer.append(prod//num)
+            return answer
