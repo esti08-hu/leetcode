@@ -6,7 +6,7 @@ class Solution:
         for a, b in prerequisites:
             graph[b].append(a)
             indegree[a] += 1
-        print(indegree)
+
         q = deque()
         for i in range(numCourses):
             if indegree[i] == 0:
@@ -19,7 +19,7 @@ class Solution:
                     indegree[nxt] -= 1
                     if indegree[nxt] == 0:
                         q.append(nxt)
-        print(indegree)
+        
         return indegree == [0] * numCourses
 
 
