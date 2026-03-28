@@ -1,18 +1,19 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        self.max_pal = ""
-        self.pal_len = 0
-        def helper(l, r):
-            while l >= 0 and r < len(s) and s[l] == s[r]:
-                if (r -l +1) > len(self.max_pal):
-                    self.max_pal = s[l:r+1]
-                l -= 1
-                r += 1
-            return self.max_pal
+        t = s[::-1]
 
-        for i in range(len(s)):
-            helper(i, i)  # odd length palindromes
-            if i < len(s) - 1:
-                helper(i, i + 1)  # even length palindromes
-        
-        return self.max_pal
+        dp = [[0]* (len(s)+1) for _ in range(len(s) + 1)]
+        max_len = [0,-1]
+        for i in range(1, len(s)+1):
+            for j in range(1, len(s)+1):
+                if s[i-1] == t[j-1]:
+                    dp[i][j] = dp[i-1][j-1] + 1
+                    start_in_s = i - dp[i][j]
+                    start_in_t = j - dp[i][j]
+
+                    if start_in_s == len(s) - j:
+                        if dp[i][j] > max_len[0]:
+                            max_len = [dp[i][j], i]
+        print(max_len)
+        return s[max_len[1] - max_len[0]: max_len[1]]
+
