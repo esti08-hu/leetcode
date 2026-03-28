@@ -14,6 +14,5 @@ class Solution:
                     if start_in_s == len(s) - j:
                         if dp[i][j] > max_len[0]:
                             max_len = [dp[i][j], i]
-        print(max_len)
         return s[max_len[1] - max_len[0]: max_len[1]]
 
