@@ -1,30 +1,34 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
-        def backtrack(row, col, word_idx):
-            
-            if word_idx == len(word):
-                return True
-            
-            if row < 0 or row >= m or col < 0 or col >= n or board[row][col] != word[word_idx]:
+        rows, cols = len(board), len(board[0])
+        dir = [(1,0), (-1,0), (0,1), (0,-1)]
+
+        def dfs(r, c, i):
+            if r < 0 or c < 0 or r == rows or c == cols or (r, c) in self.seen:
+                return False
+
+
+            if board[r][c] != word[i]:
                 return False
             
-            temp = board[row][col]
-            board[row][col] = '#'
-            
-            for dr, dc in directions:
-                if backtrack(row + dr, col + dc, word_idx + 1):
+            if i == len(word)-1:
+                return True
+
+            self.seen.add((r, c))
+
+            for dr, dc in dir:
+                nr, nc = r + dr, c + dc
+
+                if dfs(nr, nc, i+1):
                     return True
-                
-            board[row][col] = temp
+            self.seen.remove((r, c))
             return False
-        
-        m, n = len(board), len(board[0])
-        
-        directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-        
-        for i in range(m):
-            for j in range(n):
-                if backtrack(i, j, 0):
-                    return True
-        
+
+        for r in range(rows):
+            for c in range(cols):
+                if board[r][c] == word[0]:
+                    self.seen = set()
+                    if dfs(r, c, 0):
+                        return True
+
         return False
