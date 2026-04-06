@@ -7,7 +7,7 @@
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         self.min_heap = []
-        print(self.min_heap)
+
         def dfs(root):
             if not root:
                 return 
