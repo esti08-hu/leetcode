@@ -6,18 +6,22 @@
 #         self.right = right
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        self.n = k
-        self.res = -1
-        def inorder(node):
-            if not node:
+        self.min_heap = []
+        print(self.min_heap)
+        def dfs(root):
+            if not root:
                 return 
             
-            inorder(node.left)
-            self.n-=1
-            if not self.n:
-                self.res = node.val
-                return
-            inorder(node.right)
+            if len(self.min_heap) == k:
+                heappush(self.min_heap, -root.val)
+                heappop(self.min_heap)
+            
+            else:
+                heappush(self.min_heap, -root.val)
+            
+            dfs(root.left)
+            dfs(root.right)
         
-        inorder(root)
-        return self.res
+        dfs(root)
+
+        return -heappop(self.min_heap)
