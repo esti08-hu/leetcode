@@ -23,4 +23,4 @@ class Solution:
         dfs(root)
         self.heap.sort()
         
-        return -1  * self.heap[0]
+        return -self.heap[0]
