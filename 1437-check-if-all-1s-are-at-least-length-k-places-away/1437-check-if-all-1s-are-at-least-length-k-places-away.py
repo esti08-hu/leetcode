@@ -10,5 +10,4 @@ class Solution:
                     return False
                 else:
                     idx = i
-            print(idx)
         return True
