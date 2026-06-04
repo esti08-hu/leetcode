@@ -5,13 +5,15 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
-        if not preorder or not inorder:
-            return None
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        def dfs(pre, ino):
+            if not pre or not ino:
+                return None
+            root = TreeNode(pre[0])
+            mid = ino.index(pre[0])
+
+            root.left = dfs(pre[1:mid+1], ino[:mid])
+            root.right = dfs(pre[mid+1:], ino[mid+1:])
+            return root
         
-        root = TreeNode(preorder[0])
-        mid = inorder.index(preorder[0])
-        root.left = self.buildTree(preorder[1:mid + 1], inorder[:mid])
-        root.right = self.buildTree(preorder[mid + 1:], inorder[mid + 1:])
-    
-        return root
+        return dfs(preorder, inorder)
