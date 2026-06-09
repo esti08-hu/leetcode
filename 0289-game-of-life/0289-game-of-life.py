@@ -32,7 +32,3 @@ class Solution:
             for j in range(cols):
                 board[i][j] = board[i][j][1]
         
-
-
-
-
