@@ -10,8 +10,6 @@ class Solution:
                 return
             
             for num in range(prev + 1, 10):
-                if num in num_set:
-                    continue
                 if total + num > n:
                     return
 
