@@ -17,7 +17,4 @@ class Solution:
                     total += code[(i-j+n)%n]
                 res[i] = total
 
-        else:
-            return res
-
         return res
