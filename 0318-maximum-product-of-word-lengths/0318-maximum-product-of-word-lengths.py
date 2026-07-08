@@ -3,7 +3,7 @@ class Solution:
         word_dict = {}
         for word in words:
             word_dict[word] = set(word)
-        
+
         max_prod = 0
 
         for i in range(len(words)-1):
@@ -16,6 +16,4 @@ class Solution:
                     max_prod = max(max_prod, len(words[i]) * len(words[j]))
 
         return max_prod
-
-
-        return 0
+        
