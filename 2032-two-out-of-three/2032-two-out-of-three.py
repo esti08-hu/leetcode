@@ -4,13 +4,17 @@ class Solution:
         nums2_set = set(nums2)
         nums3_set = set(nums3)
         
-        nums = nums1_set.union(nums2_set)
-        nums = nums.union(nums3)
+        nums = []
+        nums += list(nums1_set)
+        nums += list(nums2_set)
+        nums += list(nums3_set)
+
+        cnt_nums = Counter(nums)
         res = []
-        for num in nums:
-            if num in nums1_set and (num in nums2_set or num in nums3_set) or num in nums2_set and (num in nums1_set or num in nums3_set) or num in nums3_set and (num in nums1_set or num in nums2_set):
-                res.append(num)
-        
+        for k, v in cnt_nums.items():
+            if v >= 2:
+                res.append(k)
+
         return res
 
         
