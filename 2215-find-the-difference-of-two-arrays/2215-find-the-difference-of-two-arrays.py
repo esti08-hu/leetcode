@@ -3,17 +3,14 @@ class Solution:
         nums1_set = set(nums1)
         nums2_set = set(nums2)
 
-        res = []
-        curr = []
+        res = [[],[]]
+        
         for num in nums1_set:
             if num not in nums2_set:
-                curr.append(num)
-        res.append(curr)
+                res[0].append(num)
 
-        curr = []
         for num in nums2_set:
             if num not in nums1_set:
-                curr.append(num)
-        res.append(curr)
+                res[1].append(num)
 
         return res
