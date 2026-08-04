@@ -13,5 +13,4 @@ class Solution:
                 r = len(colors) - j
                 break
 
-        print(r, len(colors) - l, l)
         return len(colors) - min(r, l)
